@@ -1,17 +1,20 @@
+import useTetris from "./api/useTetris"
 import { useEffect, useState } from "react"
 import Board from "../components/Board"
 
 export default function Home() {
-    const [board, setBoard] = useState(
-        Array(20)
-            .fill(null)
-            .map(() => Array(10).fill("empty"))
-    )
+    const { board, isPlaying, startGame, score } = useTetris()
 
     return (
         <div className="container">
             <h1>Tetris</h1>
-            <Board board={board}></Board>
+            <Board board={board} />
+            <div className="controls">
+                <button onClick={startGame}>
+                    {isPlaying ? "Pause" : "Start"}
+                </button>
+                <p>Score: {score}</p>
+            </div>
         </div>
     )
 }
